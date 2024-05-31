@@ -1,0 +1,1099 @@
+import random
+from tkinter import *
+from tkinter.ttk import *
+from PIL import Image, ImageTk
+from pymysql import Connection
+from PIL import Image
+import math
+
+#构建到MySQL数据库的链接
+conn = Connection(
+    host="localhost",
+    port=3306,
+    user="root",
+    password="NtmlLemon6",
+    autocommit=True   #自动提交
+)
+
+class WinGUI(Tk):
+    def __init__(self):
+        super().__init__()
+        self.__win()
+        self.tk_tabs_tarotPage = self.__tk_tabs_tarotPage(self)
+        self.tk_button_submit = self.__tk_button_submit(self.tk_tabs_tarotPage_4)
+        self.tk_input_feedback = self.__tk_input_feedback(self.tk_tabs_tarotPage_4)
+        self.tk_label_announcementtext = self.__tk_label_announcementtext(self.tk_tabs_tarotPage_4)
+        self.tk_label_feedbacktext = self.__tk_label_feedbacktext(self.tk_tabs_tarotPage_4)
+        self.tk_select_box_history = self.__tk_select_box_history(self.tk_tabs_tarotPage_3)
+        self.tk_button_dividing = self.__tk_button_dividing(self.tk_tabs_tarotPage_0)
+        self.tk_input_question = self.__tk_input_question(self.tk_tabs_tarotPage_0)
+        self.tk_frame_page = self.__tk_frame_page(self.tk_tabs_tarotPage_0)
+        self.tk_label_lwa41yde = self.__tk_label_lwa41yde(self.tk_frame_page)
+        self.tk_button_language = self.__tk_button_language(self.tk_tabs_tarotPage_0)
+        self.tk_select_box_pattern = self.__tk_select_box_pattern(self.tk_tabs_tarotPage_0)
+        self.tk_tabs_cardsUnscramble = self.__tk_tabs_cardsUnscramble(self.tk_tabs_tarotPage_2)
+        self.tk_button_thefool = self.__tk_button_thefool(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_magician = self.__tk_button_magician(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_priestess = self.__tk_button_priestess(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_empress = self.__tk_button_empress(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_emperor = self.__tk_button_emperor(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_thelovers = self.__tk_button_thelovers(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_chariot = self.__tk_button_chariot(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_strength = self.__tk_button_strength(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_thehermit = self.__tk_button_thehermit(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_fortune = self.__tk_button_fortune(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_hangedman = self.__tk_button_hangedman(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_death = self.__tk_button_death(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_thedevil = self.__tk_button_thedevil(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_temperance = self.__tk_button_temperance(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_thetower = self.__tk_button_thetower(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_themoon = self.__tk_button_themoon(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_thestar = self.__tk_button_thestar(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_thesun = self.__tk_button_thesun(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_justice = self.__tk_button_justice(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_hierophant = self.__tk_button_hierophant(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_judgement = self.__tk_button_judgement(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_theworld = self.__tk_button_theworld(self.tk_tabs_cardsUnscramble_0)
+        self.tk_button_cups01 = self.__tk_button_cups01(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_cups02 = self.__tk_button_cups02(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_cups03 = self.__tk_button_cups03(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_cups04 = self.__tk_button_cups04(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_cups05 = self.__tk_button_cups05(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_cups06 = self.__tk_button_cups06(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_cups07 = self.__tk_button_cups07(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_cups08 = self.__tk_button_cups08(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_cups09 = self.__tk_button_cups09(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_cups10 = self.__tk_button_cups10(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_Pofcups = self.__tk_button_Pofcups(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_Kingofcups = self.__tk_button_Kingofcups(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_Kofcups = self.__tk_button_Kofcups(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_Qofcups = self.__tk_button_Qofcups(self.tk_tabs_cardsUnscramble_1)
+        self.tk_button_wands01 = self.__tk_button_wands01(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_wands02 = self.__tk_button_wands02(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_wands03 = self.__tk_button_wands03(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_wands04 = self.__tk_button_wands04(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_wands05 = self.__tk_button_wands05(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_wands06 = self.__tk_button_wands06(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_wands07 = self.__tk_button_wands07(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_wands08 = self.__tk_button_wands08(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_wands09 = self.__tk_button_wands09(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_wands10 = self.__tk_button_wands10(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_Pofwands = self.__tk_button_Pofwands(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_Kofwands = self.__tk_button_Kofwands(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_Qofwands = self.__tk_button_Qofwands(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_Kingofwands = self.__tk_button_Kingofwands(self.tk_tabs_cardsUnscramble_2)
+        self.tk_button_swords01 = self.__tk_button_swords01(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_swords02 = self.__tk_button_swords02(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_swords03 = self.__tk_button_swords03(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_swords04 = self.__tk_button_swords04(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_swords05 = self.__tk_button_swords05(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_swords06 = self.__tk_button_swords06(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_swords07 = self.__tk_button_swords07(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_swords08 = self.__tk_button_swords08(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_swords09 = self.__tk_button_swords09(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_swords10 = self.__tk_button_swords10(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_Pofswords = self.__tk_button_Pofswords(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_Kofswords = self.__tk_button_Kofswords(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_Qofswords = self.__tk_button_Qofswords(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_Kingofswords = self.__tk_button_Kingofswords(self.tk_tabs_cardsUnscramble_3)
+        self.tk_button_Pentacles1 = self.__tk_button_Pentacles1(self.tk_tabs_cardsUnscramble_4)
+        self.tk_button_Pentacles2 = self.__tk_button_Pentacles2(self.tk_tabs_cardsUnscramble_4)
+        self.tk_button_Pentacles3 = self.__tk_button_Pentacles3(self.tk_tabs_cardsUnscramble_4)
+        self.tk_button_Pentacles4 = self.__tk_button_Pentacles4(self.tk_tabs_cardsUnscramble_4)
+        self.tk_button_Pentacles5 = self.__tk_button_Pentacles5(self.tk_tabs_cardsUnscramble_4)
+        self.tk_button_Pentacles6 = self.__tk_button_Pentacles6(self.tk_tabs_cardsUnscramble_4)
+        self.tk_button_Pentacles7 = self.__tk_button_Pentacles7(self.tk_tabs_cardsUnscramble_4)
+        self.tk_button_Pentacles8 = self.__tk_button_Pentacles8(self.tk_tabs_cardsUnscramble_4)
+        self.tk_button_Pentacles9 = self.__tk_button_Pentacles9(self.tk_tabs_cardsUnscramble_4)
+        self.tk_button_Pentacles10 = self.__tk_button_Pentacles10(self.tk_tabs_cardsUnscramble_4)
+        self.tk_button_Pofptcs = self.__tk_button_Pofptcs(self.tk_tabs_cardsUnscramble_4)
+        self.tk_button_Kofptcs = self.__tk_button_Kofptcs(self.tk_tabs_cardsUnscramble_4)
+        self.tk_button_Qofptcs = self.__tk_button_Qofptcs(self.tk_tabs_cardsUnscramble_4)
+        self.tk_button_Kingofptcs = self.__tk_button_Kingofptcs(self.tk_tabs_cardsUnscramble_4)
+        self.tk_tabs_introduction = self.__tk_tabs_introduction(self.tk_tabs_tarotPage_1)
+        self.tk_label_lwa3dya5 = self.__tk_label_lwa3dya5(self.tk_tabs_introduction_0)
+        self.tk_label_lwa3tua1 = self.__tk_label_lwa3tua1(self.tk_tabs_introduction_1)
+        self.tk_label_lwa3xsbd = self.__tk_label_lwa3xsbd(self.tk_tabs_introduction_2)
+        self.tk_label_lwa3zivs = self.__tk_label_lwa3zivs(self.tk_tabs_introduction_3)
+        self.tk_frame_announcement = self.__tk_frame_announcement(self.tk_tabs_tarotPage_4)
+        self.tk_label_announcementtest = self.__tk_label_announcementtest(self.tk_frame_announcement)
+        self.tk_label_announcementtest1 = self.__tk_label_announcementtest1(self.tk_frame_announcement)
+        self.tk_label_historytext = self.__tk_label_historytext(self.tk_tabs_tarotPage_3)
+
+    def __win(self):
+        self.title("✡ TAROT ✡")
+        # 设置窗口大小、居中
+        width = 600
+        height = 360
+        screenwidth = self.winfo_screenwidth()
+        screenheight = self.winfo_screenheight()
+        geometry = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
+        self.geometry(geometry)
+
+        self.minsize(width=width, height=height)
+
+    def scrollbar_autohide(self, vbar, hbar, widget):
+        """自动隐藏滚动条"""
+
+        def show():
+            if vbar: vbar.lift(widget)
+            if hbar: hbar.lift(widget)
+
+        def hide():
+            if vbar: vbar.lower(widget)
+            if hbar: hbar.lower(widget)
+
+        hide()
+        widget.bind("<Enter>", lambda e: show())
+        if vbar: vbar.bind("<Enter>", lambda e: show())
+        if vbar: vbar.bind("<Leave>", lambda e: hide())
+        if hbar: hbar.bind("<Enter>", lambda e: show())
+        if hbar: hbar.bind("<Leave>", lambda e: hide())
+        widget.bind("<Leave>", lambda e: hide())
+
+    def v_scrollbar(self, vbar, widget, x, y, w, h, pw, ph):
+        widget.configure(yscrollcommand=vbar.set)
+        vbar.config(command=widget.yview)
+        vbar.place(relx=(w + x) / pw, rely=y / ph, relheight=h / ph, anchor='ne')
+
+    def h_scrollbar(self, hbar, widget, x, y, w, h, pw, ph):
+        widget.configure(xscrollcommand=hbar.set)
+        hbar.config(command=widget.xview)
+        hbar.place(relx=x / pw, rely=(y + h) / ph, relwidth=w / pw, anchor='sw')
+
+    def create_bar(self, master, widget, is_vbar, is_hbar, x, y, w, h, pw, ph):
+        vbar, hbar = None, None
+        if is_vbar:
+            vbar = Scrollbar(master)
+            self.v_scrollbar(vbar, widget, x, y, w, h, pw, ph)
+        if is_hbar:
+            hbar = Scrollbar(master, orient="horizontal")
+            self.h_scrollbar(hbar, widget, x, y, w, h, pw, ph)
+        self.scrollbar_autohide(vbar, hbar, widget)
+
+    def __tk_tabs_tarotPage(self, parent):
+        frame = Notebook(parent)
+        self.tk_tabs_tarotPage_0 = self.__tk_frame_tarotPage_0(frame)
+        frame.add(self.tk_tabs_tarotPage_0, text="主页")
+        self.tk_tabs_tarotPage_1 = self.__tk_frame_tarotPage_1(frame)
+        frame.add(self.tk_tabs_tarotPage_1, text="文化介绍")
+        self.tk_tabs_tarotPage_2 = self.__tk_frame_tarotPage_2(frame)
+        frame.add(self.tk_tabs_tarotPage_2, text="牌意解读")
+        self.tk_tabs_tarotPage_3 = self.__tk_frame_tarotPage_3(frame)
+        frame.add(self.tk_tabs_tarotPage_3, text="历史占卜")
+        self.tk_tabs_tarotPage_4 = self.__tk_frame_tarotPage_4(frame)
+        frame.add(self.tk_tabs_tarotPage_4, text="公告与反馈")
+        frame.place(relx=0.0000, rely=0.0000, relwidth=1.0000, relheight=1.0000)
+        return frame
+
+    def __tk_frame_tarotPage_0(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0000, rely=0.0000, relwidth=1.0000, relheight=1.0000)
+        return frame
+
+    def __tk_frame_tarotPage_1(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0000, rely=0.0000, relwidth=1.0000, relheight=1.0000)
+        return frame
+
+    def __tk_frame_tarotPage_2(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0000, rely=0.0000, relwidth=1.0000, relheight=1.0000)
+        return frame
+
+    def __tk_frame_tarotPage_3(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0000, rely=0.0000, relwidth=1.0000, relheight=1.0000)
+        return frame
+
+    def __tk_frame_tarotPage_4(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0000, rely=0.0000, relwidth=1.0000, relheight=1.0000)
+        return frame
+
+    def __tk_button_submit(self, parent):
+        btn = Button(parent, text="提交", takefocus=False, )
+        btn.place(relx=0.7917, rely=0.5833, relwidth=0.0833, relheight=0.0833)
+        return btn
+
+    def __tk_input_feedback(self, parent):
+        ipt = Entry(parent, )
+        ipt.place(relx=0.1250, rely=0.5833, relwidth=0.6667, relheight=0.0833)
+        return ipt
+
+    def __tk_label_announcementtext(self, parent):
+        label = Label(parent, text="公告：", anchor="center", )
+        label.place(relx=0.1250, rely=0.0000, relwidth=0.0833, relheight=0.0833)
+        return label
+
+    def __tk_label_feedbacktext(self, parent):
+        label = Label(parent, text="反馈：", anchor="center", )
+        label.place(relx=0.1250, rely=0.5000, relwidth=0.0833, relheight=0.0833)
+        return label
+
+    def __tk_select_box_history(self, parent):
+        cb = Combobox(parent, state="readonly", )
+        cb['values'] = ("记录1", "记录2", "记录3", "记录4", "记录5")
+        cb.place(relx=0.1500, rely=0.1389, relwidth=0.7000, relheight=0.0833)
+        return cb
+
+    # def __tk_button_dividing(self, parent):
+    #     btn = Button(parent, text="✡ 开始占卜 ✡", takefocus=False, )
+    #     btn.place(relx=0.4250, rely=0.6944, relwidth=0.1500, relheight=0.0833)
+    #     return btn
+    #
+    # def __tk_input_question(self, parent):
+    #     ipt = Entry(parent, )
+    #     #ipt = input("请输入一些文本：")  # 获取用户输入
+    #     user_input = ipt.get()  # 获取用户输入的文本
+    #     ipt.place(relx=0.3167, rely=0.5556, relwidth=0.5167, relheight=0.0833)
+    #     return ipt
+
+    def __tk_button_dividing(self, parent):
+        # 按钮绑定事件，点击时执行 self.calculate_hash
+        btn = Button(parent, text="✡ 开始占卜 ✡", takefocus=False, command=self.calculate_hash)
+        btn.place(relx=0.4250, rely=0.6944, relwidth=0.1500, relheight=0.0833)
+        return btn
+
+    def __tk_input_question(self, parent):
+        ipt = Entry(parent)
+        ipt.place(relx=0.3167, rely=0.5556, relwidth=0.5167, relheight=0.0833)
+        return ipt
+
+
+
+    def __tk_frame_page(self, parent):
+        frame = Frame(parent, )
+        frame.place(relx=0.1667, rely=0.0889, relwidth=0.6667, relheight=0.4167)
+        return frame
+
+    def __tk_label_lwa41yde(self, parent):
+        label = Label(parent, text="开始你的占卜之旅吧！", anchor="center", )
+        label.place(relx=0.0000, rely=0.8000, relwidth=1.0000, relheight=0.2000)
+        return label
+
+    def __tk_button_language(self, parent):
+        btn = Button(parent, text="language", takefocus=False, )
+        btn.place(relx=0.8800, rely=0.0000, relwidth=0.1200, relheight=0.0833)
+        return btn
+
+    def __tk_select_box_pattern(self, parent):
+        cb = Combobox(parent, state="readonly", )
+        cb['values'] = ("✡六芒星", "✡圣三角", "✡凯尔特十字", "✡二择一", "✡恋人金字塔")
+        cb.place(relx=0.1667, rely=0.5556, relwidth=0.1500, relheight=0.0833)
+        cb.current(0)  # 默认选择第一个
+        return cb
+
+    def __tk_tabs_cardsUnscramble(self, parent):
+        frame = Notebook(parent)
+        self.tk_tabs_cardsUnscramble_0 = self.__tk_frame_cardsUnscramble_0(frame)
+        frame.add(self.tk_tabs_cardsUnscramble_0, text="✡大阿卡纳")
+        self.tk_tabs_cardsUnscramble_1 = self.__tk_frame_cardsUnscramble_1(frame)
+        frame.add(self.tk_tabs_cardsUnscramble_1, text="✡小阿卡纳-圣杯")
+        self.tk_tabs_cardsUnscramble_2 = self.__tk_frame_cardsUnscramble_2(frame)
+        frame.add(self.tk_tabs_cardsUnscramble_2, text="✡小阿卡纳-权杖")
+        self.tk_tabs_cardsUnscramble_3 = self.__tk_frame_cardsUnscramble_3(frame)
+        frame.add(self.tk_tabs_cardsUnscramble_3, text="✡小阿卡纳-宝剑")
+        self.tk_tabs_cardsUnscramble_4 = self.__tk_frame_cardsUnscramble_4(frame)
+        frame.add(self.tk_tabs_cardsUnscramble_4, text="✡小阿卡纳-星币")
+        frame.place(relx=0.0833, rely=0.0444, relwidth=0.8333, relheight=0.7639)
+        return frame
+
+    def __tk_frame_cardsUnscramble_0(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0833, rely=0.0444, relwidth=0.8333, relheight=0.7639)
+        return frame
+
+    def __tk_frame_cardsUnscramble_1(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0833, rely=0.0444, relwidth=0.8333, relheight=0.7639)
+        return frame
+
+    def __tk_frame_cardsUnscramble_2(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0833, rely=0.0444, relwidth=0.8333, relheight=0.7639)
+        return frame
+
+    def __tk_frame_cardsUnscramble_3(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0833, rely=0.0444, relwidth=0.8333, relheight=0.7639)
+        return frame
+
+    def __tk_frame_cardsUnscramble_4(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0833, rely=0.0444, relwidth=0.8333, relheight=0.7639)
+        return frame
+
+    def __tk_button_thefool(self, parent):
+        btn = Button(parent, text="愚人", takefocus=False, )
+        btn.place(relx=0.0800, rely=0.0873, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_magician(self, parent):
+        btn = Button(parent, text="魔术师", takefocus=False, )
+        btn.place(relx=0.2260, rely=0.0873, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_priestess(self, parent):
+        btn = Button(parent, text="女祭司", takefocus=False, )
+        btn.place(relx=0.3760, rely=0.0873, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_empress(self, parent):
+        btn = Button(parent, text="女皇", takefocus=False, )
+        btn.place(relx=0.5260, rely=0.0873, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_emperor(self, parent):
+        btn = Button(parent, text="皇帝", takefocus=False, )
+        btn.place(relx=0.6720, rely=0.0836, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_thelovers(self, parent):
+        btn = Button(parent, text="恋人", takefocus=False, )
+        btn.place(relx=0.0800, rely=0.2836, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_chariot(self, parent):
+        btn = Button(parent, text="战车", takefocus=False, )
+        btn.place(relx=0.2280, rely=0.2836, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_strength(self, parent):
+        btn = Button(parent, text="力量", takefocus=False, )
+        btn.place(relx=0.3760, rely=0.2836, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_thehermit(self, parent):
+        btn = Button(parent, text="隐士", takefocus=False, )
+        btn.place(relx=0.5260, rely=0.2836, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_fortune(self, parent):
+        btn = Button(parent, text="命运之轮", takefocus=False, )
+        btn.place(relx=0.6720, rely=0.2836, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_hangedman(self, parent):
+        btn = Button(parent, text="倒吊人", takefocus=False, )
+        btn.place(relx=0.0800, rely=0.4800, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_death(self, parent):
+        btn = Button(parent, text="死神", takefocus=False, )
+        btn.place(relx=0.2280, rely=0.4800, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_thedevil(self, parent):
+        btn = Button(parent, text="恶魔", takefocus=False, )
+        btn.place(relx=0.5260, rely=0.4800, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_temperance(self, parent):
+        btn = Button(parent, text="节制", takefocus=False, )
+        btn.place(relx=0.3760, rely=0.4800, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_thetower(self, parent):
+        btn = Button(parent, text="高塔", takefocus=False, )
+        btn.place(relx=0.6720, rely=0.4800, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_themoon(self, parent):
+        btn = Button(parent, text="月亮", takefocus=False, )
+        btn.place(relx=0.0780, rely=0.6764, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_thestar(self, parent):
+        btn = Button(parent, text="星星", takefocus=False, )
+        btn.place(relx=0.8200, rely=0.4800, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_thesun(self, parent):
+        btn = Button(parent, text="太阳", takefocus=False, )
+        btn.place(relx=0.2280, rely=0.6764, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_justice(self, parent):
+        btn = Button(parent, text="正义", takefocus=False, )
+        btn.place(relx=0.8200, rely=0.2836, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_hierophant(self, parent):
+        btn = Button(parent, text="教皇", takefocus=False, )
+        btn.place(relx=0.8200, rely=0.0873, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_judgement(self, parent):
+        btn = Button(parent, text="审判", takefocus=False, )
+        btn.place(relx=0.3760, rely=0.6764, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_theworld(self, parent):
+        btn = Button(parent, text="世界", takefocus=False, )
+        btn.place(relx=0.5260, rely=0.6764, relwidth=0.1000, relheight=0.1091)
+        return btn
+
+    def __tk_button_cups01(self, parent):
+        btn = Button(parent, text="圣杯一", takefocus=False, )
+        btn.place(relx=0.1040, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_cups02(self, parent):
+        btn = Button(parent, text="圣杯二", takefocus=False, )
+        btn.place(relx=0.2720, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_cups03(self, parent):
+        btn = Button(parent, text="圣杯三", takefocus=False, )
+        btn.place(relx=0.4400, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_cups04(self, parent):
+        btn = Button(parent, text="圣杯四", takefocus=False, )
+        btn.place(relx=0.6080, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_cups05(self, parent):
+        btn = Button(parent, text="圣杯五", takefocus=False, )
+        btn.place(relx=0.7760, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_cups06(self, parent):
+        btn = Button(parent, text="圣杯六", takefocus=False, )
+        btn.place(relx=0.1040, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_cups07(self, parent):
+        btn = Button(parent, text="圣杯七", takefocus=False, )
+        btn.place(relx=0.2720, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_cups08(self, parent):
+        btn = Button(parent, text="圣杯八", takefocus=False, )
+        btn.place(relx=0.4400, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_cups09(self, parent):
+        btn = Button(parent, text="圣杯九", takefocus=False, )
+        btn.place(relx=0.6080, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_cups10(self, parent):
+        btn = Button(parent, text="圣杯十", takefocus=False, )
+        btn.place(relx=0.7760, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pofcups(self, parent):
+        btn = Button(parent, text="圣杯侍从", takefocus=False, )
+        btn.place(relx=0.1040, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Kingofcups(self, parent):
+        btn = Button(parent, text="圣杯国王", takefocus=False, )
+        btn.place(relx=0.6080, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Kofcups(self, parent):
+        btn = Button(parent, text="圣杯骑士", takefocus=False, )
+        btn.place(relx=0.2720, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Qofcups(self, parent):
+        btn = Button(parent, text="圣杯王后", takefocus=False, )
+        btn.place(relx=0.4400, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_wands01(self, parent):
+        btn = Button(parent, text="权杖一", takefocus=False, command=self.meaningpage)
+        btn.place(relx=0.1040, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_wands02(self, parent):
+        btn = Button(parent, text="权杖二", takefocus=False, )
+        btn.place(relx=0.2720, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_wands03(self, parent):
+        btn = Button(parent, text="权杖三", takefocus=False, )
+        btn.place(relx=0.4400, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_wands04(self, parent):
+        btn = Button(parent, text="权杖四", takefocus=False, )
+        btn.place(relx=0.6080, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_wands05(self, parent):
+        btn = Button(parent, text="权杖五", takefocus=False, )
+        btn.place(relx=0.7760, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_wands06(self, parent):
+        btn = Button(parent, text="权杖六", takefocus=False, )
+        btn.place(relx=0.1040, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_wands07(self, parent):
+        btn = Button(parent, text="权杖七", takefocus=False, )
+        btn.place(relx=0.2720, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_wands08(self, parent):
+        btn = Button(parent, text="权杖八", takefocus=False, )
+        btn.place(relx=0.4400, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_wands09(self, parent):
+        btn = Button(parent, text="权杖九", takefocus=False, )
+        btn.place(relx=0.6080, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_wands10(self, parent):
+        btn = Button(parent, text="权杖十", takefocus=False, )
+        btn.place(relx=0.7760, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pofwands(self, parent):
+        btn = Button(parent, text="权杖侍从", takefocus=False, )
+        btn.place(relx=0.1040, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Kofwands(self, parent):
+        btn = Button(parent, text="权杖骑士", takefocus=False, )
+        btn.place(relx=0.2720, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Qofwands(self, parent):
+        btn = Button(parent, text="权杖王后", takefocus=False, )
+        btn.place(relx=0.4400, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Kingofwands(self, parent):
+        btn = Button(parent, text="权杖国王", takefocus=False, )
+        btn.place(relx=0.6080, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_swords01(self, parent):
+        btn = Button(parent, text="宝剑一", takefocus=False, )
+        btn.place(relx=0.1040, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_swords02(self, parent):
+        btn = Button(parent, text="宝剑二", takefocus=False, )
+        btn.place(relx=0.2720, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_swords03(self, parent):
+        btn = Button(parent, text="宝剑三", takefocus=False, )
+        btn.place(relx=0.4400, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_swords04(self, parent):
+        btn = Button(parent, text="宝剑四", takefocus=False, )
+        btn.place(relx=0.6080, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_swords05(self, parent):
+        btn = Button(parent, text="宝剑五", takefocus=False, )
+        btn.place(relx=0.7760, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_swords06(self, parent):
+        btn = Button(parent, text="宝剑六", takefocus=False, )
+        btn.place(relx=0.1040, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_swords07(self, parent):
+        btn = Button(parent, text="宝剑七", takefocus=False, )
+        btn.place(relx=0.2720, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_swords08(self, parent):
+        btn = Button(parent, text="宝剑八", takefocus=False, )
+        btn.place(relx=0.4400, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_swords09(self, parent):
+        btn = Button(parent, text="宝剑九", takefocus=False, )
+        btn.place(relx=0.6080, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_swords10(self, parent):
+        btn = Button(parent, text="宝剑十", takefocus=False, )
+        btn.place(relx=0.7760, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pofswords(self, parent):
+        btn = Button(parent, text="宝剑侍从", takefocus=False, )
+        btn.place(relx=0.1040, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Kofswords(self, parent):
+        btn = Button(parent, text="宝剑骑士", takefocus=False, )
+        btn.place(relx=0.2720, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Qofswords(self, parent):
+        btn = Button(parent, text="宝剑王后", takefocus=False, )
+        btn.place(relx=0.4400, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Kingofswords(self, parent):
+        btn = Button(parent, text="宝剑国王", takefocus=False, )
+        btn.place(relx=0.6080, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pentacles1(self, parent):
+        btn = Button(parent, text="星币一", takefocus=False, )
+        btn.place(relx=0.1040, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pentacles2(self, parent):
+        btn = Button(parent, text="星币二", takefocus=False, )
+        btn.place(relx=0.2720, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pentacles3(self, parent):
+        btn = Button(parent, text="星币三", takefocus=False, )
+        btn.place(relx=0.4400, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pentacles4(self, parent):
+        btn = Button(parent, text="星币四", takefocus=False, )
+        btn.place(relx=0.6080, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pentacles5(self, parent):
+        btn = Button(parent, text="星币五", takefocus=False, )
+        btn.place(relx=0.7760, rely=0.1455, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pentacles6(self, parent):
+        btn = Button(parent, text="星币六", takefocus=False, )
+        btn.place(relx=0.1040, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pentacles7(self, parent):
+        btn = Button(parent, text="星币七", takefocus=False, )
+        btn.place(relx=0.2720, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pentacles8(self, parent):
+        btn = Button(parent, text="星币八", takefocus=False, )
+        btn.place(relx=0.4400, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pentacles9(self, parent):
+        btn = Button(parent, text="星币九", takefocus=False, )
+        btn.place(relx=0.6080, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pentacles10(self, parent):
+        btn = Button(parent, text="星币十", takefocus=False, )
+        btn.place(relx=0.7760, rely=0.3636, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Pofptcs(self, parent):
+        btn = Button(parent, text="星币侍从", takefocus=False, )
+        btn.place(relx=0.1040, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Kofptcs(self, parent):
+        btn = Button(parent, text="星币骑士", takefocus=False, )
+        btn.place(relx=0.2720, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Qofptcs(self, parent):
+        btn = Button(parent, text="星币王后", takefocus=False, )
+        btn.place(relx=0.4400, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_button_Kingofptcs(self, parent):
+        btn = Button(parent, text="星币国王", takefocus=False, )
+        btn.place(relx=0.6080, rely=0.5818, relwidth=0.1200, relheight=0.1091)
+        return btn
+
+    def __tk_tabs_introduction(self, parent):
+        frame = Notebook(parent)
+        self.tk_tabs_introduction_0 = self.__tk_frame_introduction_0(frame)
+        frame.add(self.tk_tabs_introduction_0, text=" ✡什么是塔罗牌")
+        self.tk_tabs_introduction_1 = self.__tk_frame_introduction_1(frame)
+        frame.add(self.tk_tabs_introduction_1, text=" ✡历史起源")
+        self.tk_tabs_introduction_2 = self.__tk_frame_introduction_2(frame)
+        frame.add(self.tk_tabs_introduction_2, text=" ✡三大体系")
+        self.tk_tabs_introduction_3 = self.__tk_frame_introduction_3(frame)
+        frame.add(self.tk_tabs_introduction_3, text=" ✡组成结构")
+        frame.place(relx=0.0833, rely=0.0417, relwidth=0.8333, relheight=0.7639)
+        return frame
+
+    def __tk_frame_introduction_0(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0833, rely=0.0417, relwidth=0.8333, relheight=0.7639)
+        return frame
+
+    def __tk_frame_introduction_1(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0833, rely=0.0417, relwidth=0.8333, relheight=0.7639)
+        return frame
+
+    def __tk_frame_introduction_2(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0833, rely=0.0417, relwidth=0.8333, relheight=0.7639)
+        return frame
+
+    def __tk_frame_introduction_3(self, parent):
+        frame = Frame(parent)
+        frame.place(relx=0.0833, rely=0.0417, relwidth=0.8333, relheight=0.7639)
+        return frame
+
+    def __tk_label_lwa3dya5(self, parent):
+        label = Label(parent,
+                      text="      塔罗牌，由“TAROT”一词音译而来，被称为“大自然的奥秘库”。"
+                           "它是西方古老的占卜工具，中世纪起流行于欧洲，地位相当于中国的《周易》，其起源一直是个谜。"
+                           "塔罗共78张牌，其中大阿尔卡那牌22张，小阿尔卡那牌56张。可分别使用进行占卜，也可将78张混合共同使用进行占卜。           "
+                           "值得一提的是，塔罗牌并非指固定的一种牌，实际上塔罗牌种类繁多，至少也有上千种，"
+                           "但它们其实大多数都是由世界三大塔罗体系为蓝本延伸而来的。"
+                           "塔罗牌由22张大阿卡那牌和56张小阿卡那牌组成。"
+                           "塔罗牌是一种针对人、事、物进行分析、预测和提供建议的工具。该定义准确、直接，受到塔罗界广泛认可。"
+                           "塔罗牌可以针对爱情、人际关系、工作(学业)等不同。有学者将塔罗牌占卜用作心理咨询中，但一般仅仅使用到了塔罗的分析功能。",
+                      wraplength=450,
+                      anchor="center", )
+        label.place(relx=0.0000, rely=0.0000, relwidth=1.0000, relheight=0.9091)
+        return label
+
+    def __tk_label_lwa3tua1(self, parent):
+        label = Label(parent,
+                      text="      塔罗牌是一种古老的占卜工具，它的起源一直是个神秘的传说，许多研究神秘学的专家都试着找出一点线索。"
+                           "总结各种说法，塔罗牌的起源大致因该是这样的:塔罗牌的大阿卡那起源自古犹太人的Kabbaka，由于古犹太人跟古埃及人经常有接触，也吸纳了不少埃及的宗教符号。"
+                           "随着中东战乱频繁，塔罗牌的前身几乎消失，后来吉普赛人不知怎么学会使用塔罗牌，他们把它当作占卜工具。"
+                           "十二至十四世纪间塔罗牌传至欧洲，并风行于西方的中世纪，从很多当时的图画、书籍中都可以找到它的踪影，无论是王宫贵族或是平民百姓，塔罗牌无所不在。"
+                           "一直到教会的兴起，塔罗牌被视为异教的神秘魔法，从此遭到打压。有心人士的保护下，塔罗牌还是存活了下来，在世人面前展现它的神秘气息。"
+                           "教会的势力减弱后，塔罗牌又可以得到发展，陆续有新的塔罗牌推出，尤其是十九世纪末，研究人员把塔罗牌和古犹太人密教的卷轴文物联系起来后，"
+                           "塔罗牌的研究变的更有系统，伟特塔罗牌(Rider tarot)就是其中的代表。",
+                      wraplength=450,
+                      anchor="center", )
+        label.place(relx=0.0000, rely=0.0000, relwidth=1.0000, relheight=0.9091)
+        return label
+
+    def __tk_label_lwa3xsbd(self, parent):
+        label = Label(parent,
+                      text="      即马赛塔罗牌（Tarot of Marseilles)、伟特塔罗牌(The Rider-Waite Tarot)、托特塔罗牌，又称透特塔罗牌(Aleister-Crowley Thoth Tarot )",
+                      wraplength=450,
+                      anchor="center", )
+        label.place(relx=0.0000, rely=0.0000, relwidth=1.0000, relheight=0.9091)
+        return label
+
+    def __tk_label_lwa3zivs(self, parent):
+        label = Label(parent,
+                      text=
+                            "      塔罗牌由22张大阿卡那牌和56张小阿卡那牌组成。                                       "
+                            "大阿卡那: 大阿卡那牌就如同它的名字一样，是用来解释命运的大致运势。每一张牌都反映着人生的不同际遇。"
+                           "因此，占卜时出现的大牌都会成为分析的重点。它给我们的答案或讯息是关于手上比较大的问题或主要情况的同时为我们提供高层次的思维教诲。"
+                           "这些教诲为我们揭示面对当前重要问题的答案，让我们更好地选择下一步，而并非给我们一个确切的解决方案。 "
+                           "                                                                              "
+                           "小阿卡那:                                                小阿卡那牌是用来补足大阿卡那牌不足之处。若是我们想要更进一步知道命运的真相或是对方的事情。"
+                           "其中由侍从、骑士、皇后、国王组成的人物牌，也称为宫廷牌(Court cards)。",
+                      wraplength=450,
+                      anchor="center", )
+        label.place(relx=0.0000, rely=0.0000, relwidth=1.0000, relheight=0.9091)
+        return label
+
+    def __tk_frame_announcement(self, parent):
+        frame = Frame(parent, )
+        frame.place(relx=0.1250, rely=0.0833, relwidth=0.7500, relheight=0.3333)
+        return frame
+
+    def __tk_label_announcementtest(self, parent):
+        label = Label(parent, text="测试0", anchor="center", )
+        label.place(relx=0.0000, rely=0.0000, relwidth=1.0000, relheight=0.2500)
+        return label
+
+    def __tk_label_announcementtest1(self, parent):
+        label = Label(parent, text="测试1", anchor="center", )
+        label.place(relx=0.0000, rely=0.2500, relwidth=1.0000, relheight=0.2500)
+        return label
+
+    def __tk_label_historytext(self, parent):
+        label = Label(parent, text="↓ ↓ 可以在这里查看历史占卜(     *´▽`*)☆ﾟ.*･｡", anchor="center", )
+        label.place(relx=0.1500, rely=0.0278, relwidth=0.7000, relheight=0.0833)
+        return label
+
+    def meaningpage(self):
+        Third_page = ThirdPage(win)
+        Third_page.transient(win)
+        Third_page.grab_set()
+
+        cursor = conn.cursor()  # 获取到游标对象
+        conn.select_db("tarot")
+        cursor.execute("select count(*) from arcana")
+        aa = cursor.fetchone()
+        cursor.execute('select id,nameCH,nameEN,constellation,mainmeaning,meaning,interpretation,image from arcana')
+        for i in range(aa[0]):
+            id, b, c, d, e, f, g, image_path = cursor.fetchone()
+            if id == 36:
+                b = "{}".format(b)
+                c = "{}".format(c)
+                d = "{}".format(d)
+                e = "主要含义：{}".format(e)
+                f = "牌意解读：{}".format(f)
+                g = "牌面解读：{}".format(g)
+                img = Image.open(image_path)
+
+                # 更新Third_page中的内容
+                Third_page.update_content(b, c, d, e, f, g, img)
+
+                print(b)
+                print(c)
+                print(d)
+                print(e)
+                print(f)
+                print(g)
+
+    def calculate_hash(self):
+        # 获取输入框中的文本
+        user_input = self.tk_input_question.get()
+        if not user_input:
+            user_input = "1"
+        # 获取选择框中的模式
+        pattern = self.tk_select_box_pattern.get()
+
+        # 根据不同的模式计算相应的哈希值
+        if pattern == "✡六芒星":
+            output_count = 7
+        elif pattern == "✡圣三角":
+            output_count = 4
+        elif pattern == "✡凯尔特十字":
+            output_count = 10
+        elif pattern == "✡二择一":
+            output_count = 6
+        elif pattern == "✡恋人金字塔":
+            output_count = 4
+        else:
+            output_count = 1  # 默认输出一个值
+
+        cursor = conn.cursor()  # 获取到游标对象
+        conn.select_db("tarot")
+        cursor.execute("select count(*) from arcana")
+        aa = cursor.fetchone()[0]
+        # print(aa)
+
+        results = self.hash_algorithm(user_input, output_count)
+
+        images = []
+        for random_id in results:
+            cursor.execute('select image from arcana where id = %s',(random_id,))
+            tarot_image_path = cursor.fetchone()[0]
+            images.append(tarot_image_path)
+
+        # second_page = SecondPage(win)
+        # second_page.transient(win)
+        # second_page.grab_set()
+
+        second_page = SecondPage(self, images)
+        second_page.transient(self)
+        second_page.grab_set()
+
+        # index = 0
+        # while index < len(results):
+        #     random_id = results[index]
+        #     cursor.execute('select id,image from arcana')
+        #     for i in range(aa[0]):
+        #         tarot_id, tarot_image_path = cursor.fetchone()
+        #         if tarot_id == random_id:
+        #             tarot_image = Image.open(tarot_image_path)
+        #             tarot_image.show()
+        #     print(random_id)  # 输出结果
+        #     index += 1
+
+        # results = self.hash_algorithm(user_input, output_count)
+        # print(results)  # 输出结果
+
+        # win.wait_window(second_page)
+
+
+    def hash_algorithm(self, inStr, count):
+        results = []
+        for _ in range(count):
+            sun = 0
+            for wd in inStr:
+                sun = (sun + ord(wd) * random.randint(0, 155)) % 156
+            results.append(sun)
+        return results
+
+class Win(WinGUI):
+    def __init__(self, controller):
+        self.ctl = controller
+        super().__init__()
+        self.__event_bind()
+        self.__style_config()
+        self.ctl.init(self)
+
+    def __event_bind(self):
+        pass
+
+    def __style_config(self):
+        pass
+
+
+
+class SecondPage(Toplevel):
+    def __init__(self, parent,tarot_image_path):
+        super().__init__(parent)
+        self.title("Second Page")
+        self.geometry("900x600")
+        screenwidth = self.winfo_screenwidth()
+        screenheight = self.winfo_screenheight()
+        geometry = '%dx%d+%d+%d' % (900, 600, (screenwidth - 900) // 2, (screenheight - 600) // 2)
+        self.geometry(geometry)
+        self.resizable(width=False, height=False)
+
+        self.tarot_image_path = tarot_image_path
+
+        cursor = conn.cursor()  # 获取到游标对象
+        conn.select_db("tarot")
+
+        images = []
+        for img_path in tarot_image_path:
+            image = Image.open(img_path)
+            # 调整图片大小（例如，将图片缩小到105x180像素）
+            image = image.resize((105,180), Image.LANCZOS)
+            images.append(ImageTk.PhotoImage(image))
+
+        # 创建Label用于显示图片
+        self.labels = []
+        for i, image in enumerate(images):
+            label = Label(self, image=image)
+            label.image = image  # 保持对图片对象的引用，避免被垃圾回收
+            label.bind("<Button-1>", lambda event, idx=i: self.open_new_page(idx))  # 绑定左键点击事件
+            self.labels.append(label)
+
+        # 计算六边形的六个角的坐标
+        center_x = 450
+        center_y = 300
+        radius = 200
+        angles = [60 * i for i in range(6)]
+        coords = [(center_x + radius * math.cos(math.radians(angle)), center_y + radius * math.sin(math.radians(angle))) for angle in angles]
+
+        # 将Label放置在六边形的六个角
+        for i, label in enumerate(self.labels[:6]):
+            x, y = coords[i]
+            label.place(x=x, y=y, anchor=CENTER)
+
+        # 将第七张图片放置在六边形的中心
+        self.labels[6].place(x=center_x, y=center_y, anchor=CENTER)
+
+    def open_new_page(self, idx):
+        # 这里可以根据需要在新页面中显示点击的图片内容
+        image_path = self.tarot_image_path[idx]
+
+        # Third_page = ThirdPage(self)
+        # Third_page.transient(self)
+        # Third_page.grab_set()
+        # print("Opening new page with image index:", idx)
+
+        cursor = conn.cursor()  # 获取到游标对象
+        conn.select_db("tarot")
+        cursor.execute(
+            'SELECT id, nameCH, nameEN, constellation, mainmeaning, meaning, interpretation, image FROM arcana WHERE image = %s',
+            (image_path,))
+        result = cursor.fetchone()
+
+        if result:
+            id, nameCH, nameEN, constellation, mainmeaning, meaning, interpretation, image_path = result
+            nameCH = "{}".format(nameCH)
+            nameEN = "{}".format(nameEN)
+            constellation = "{}".format(constellation)
+            mainmeaning = "主要含义：{}".format(mainmeaning)
+            meaning = "牌意解读：{}".format(meaning)
+            interpretation = "牌面解读：{}".format(interpretation)
+            img = Image.open(image_path)
+
+            Third_page = ThirdPage(self)
+            Third_page.transient(self)
+            Third_page.grab_set()
+            #print("Opening new page with image index:", idx)
+
+            Third_page.update_content(nameCH, nameEN, constellation, mainmeaning, meaning, interpretation, img)
+            Third_page.mainloop()
+
+class ThirdPage(Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.title("ThirdPage")
+        self.geometry("1200x900")
+        screenwidth = self.winfo_screenwidth()
+        screenheight = self.winfo_screenheight()
+        geometry = '%dx%d+%d+%d' % (1200, 900, (screenwidth - 900) // 2, (screenheight - 900) // 2)
+        self.geometry(geometry)
+        self.resizable(width=False, height=False)
+
+        # 添加显示数据的Label控件
+        self.label_nameCH = Label(self, text="")
+        self.label_nameCH.pack()
+
+        self.label_nameEN = Label(self, text="")
+        self.label_nameEN.pack()
+
+        self.label_constellation = Label(self, text="")
+        self.label_constellation.pack()
+
+        self.label_mainmeaning = Label(self, text="")
+        self.label_mainmeaning.pack()
+
+        self.label_meaning = Label(self, text="")
+        self.label_meaning.pack()
+
+        self.label_interpretation = Label(self, text="")
+        self.label_interpretation.pack()
+
+        self.image_label = Label(self)
+        self.image_label.pack()
+
+    def update_content(self, b, c, d, e, f, g, img):
+        self.label_nameCH.config(text=b)
+        self.label_nameEN.config(text=c)
+        self.label_constellation.config(text=d)
+        self.label_mainmeaning.config(text=e)
+        self.label_meaning.config(text=f)
+        self.label_interpretation.config(text=g)
+
+        # img = Image.open(img)
+        # img = img.resize((200, 300), Image.ANTIALIAS)
+        # self.img = ImageTk.PhotoImage(img)
+        # self.image_label.config(image=self.img)
+        # self.image_label.image = self.image  # 保持对图片对象的引用，避免被垃圾回收
+
+        # 更新图片
+        img = img.resize((105,180))
+        self.image = ImageTk.PhotoImage(img)
+        self.image_label.config(image=self.image)
+        self.image_label.image = self.image  # 保持对图片对象的引用，避免被垃圾回收
+
+class CardsMeaningPage(Toplevel):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.title("CardsMeaningPage")
+        self.geometry("900x600")
+        screenwidth = self.winfo_screenwidth()
+        screenheight = self.winfo_screenheight()
+        geometry = '%dx%d+%d+%d' % (900, 600, (screenwidth - 900) // 2, (screenheight - 600) // 2)
+        self.geometry(geometry)
+        self.resizable(width=False, height=False)
+
+        cursor = conn.cursor()  # 获取到游标对象
+        conn.select_db("tarot")
+
+if __name__ == "__main__":
+    win = WinGUI()
+
+    # def on_button_click():
+    #     second_page = SecondPage(win)
+    #     second_page.transient(win)
+    #     second_page.grab_set()
+    #     win.wait_window(second_page)
+
+    # btn = Button(win, text="Open Second Page", command=on_button_click)
+    # btn.place(relx=0.4, rely=0.5)
+
+    win.mainloop()
